@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type"  content="text/html charset=UTF-8" />
+  <title>Expocaccer</title>
+  <base href="/">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css" integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX" crossorigin="anonymous">
+</head>
+<body>
+
+
+	<div class="container" style="position:relative; top:5%; ">
+		<div class="row justify-content-center">
+			<div class="col-sm-12 col-md-12 col-lg-8 col-xl-8">
+				<div class="card">
+				  <div class="card-body">
+				  		<div class="container-fluid">
+				  			<div class="row" style="text-align: center;">
+				  				<div class="col-lg-12 col-xl-12">
+				  					<img src="http://images.lisko.com.br/logo_expocaccer_small.png" class="img-fluid" alt="Responsive image">
+				  				</div>
+				  			</div>
+				  			<br />
+				  			<br />
+				  			<br />
+				  			<div class="row">
+				  				<div class="col-lg-12 col-xl-12" style="font-size: 12px;">
+				  					<a> Patroc&iacute;nio, ${dataextenso} </a>
+				  					<br />
+						  			<br />
+						  			<br />
+						  			<a> ACADEMIA DE CAF&Eacute; LTDA - EPP (T02724) </a>
+						  			<br />
+						  			<br />
+						  			<br />
+				  				</div>
+				  			</div>
+				  			<div class="row">
+				  				<div class="col-lg-12 col-xl-12" style="text-align: justify; font-size: 12px;">
+				  					<a> Pelo presente, informamos que at&eacute; o dia ${datapadrao} encontra(m) se vencido(s) o(s) t&iacute;tulo(s) abaixo relacionado(s), de sua responsabilidade, os quais, dever&atilde;o ser liquidados junto ao nosso departamento FINANCEIRO.</a>
+				  				</div>
+				  			</div>
+				  			<br />
+				  			<br />
+				  			<br />
+				  			<div class="row">
+				  				<div class="col-lg-12 col-xl-12" style="font-size: 12px;">
+				  					<a> Taxa de Juros ao dia (%): 0,05 </a>
+				  					<br />
+						  			<br />
+						  			<a> Taxa de Multa (%): 0 </a>
+				  				</div>
+				  			</div>
+				  			<br />
+				  			<br />
+				  			<div class="row">
+				  				<div class="col-lg-12 col-xl-12" style="font-size: 12px; text-align: center; text-decoration: underline;">
+				  					<a> RELA&Ccedil;&Atilde;O DOS T&Iacute;TULOS EM ABERTO </a>
+				  				</div>
+				  			</div>                            
+				  			<br />
+						  	<br />
+                                                        <div class="row">
+								<div class="col-12 col-sm-12 col-lg-12 col-xl-12" style="font-size: 12px;">
+                                                                    <table class="table table-sm table-hover">
+                                                                        <thead >
+                                                                                <tr>
+                                                                                <th style="font-size: 12px;" scope="col">T&itilde;tulo</th>
+                                                                                <th style="font-size: 12px;" scope="col">Emiss&atilde;o</th>
+                                                                                <th style="font-size: 12px;" scope="col">Vencimento</th>
+                                                                                <th style="font-size: 12px;" scope="col">Valor Atual</th>  
+                                                                                <th style="font-size: 12px;" scope="col">Valor Corrigido</th>
+                                                                                <th style="font-size: 12px;" scope="col">Saldo</th>
+                                                                                </tr>
+                                                                        </thead>
+                                                                        <tbody style="font-size: 12px;">
+                                                                                <#assign total_atual = 0>
+                                                                                <#assign total_corrigido = 0>
+                                                                                <#assign total_saldo = 0>
+                                                                                <#list titulos as titulo>
+                                                                                         <#assign total_atual = total_atual + titulo.valor>
+                                                                                         <#assign total_corrigido = total_corrigido + titulo.valor>
+                                                                                         <#assign total_saldo = total_atual + titulo.saldo>
+                                                                                         <#assign total_valor = titulo.total_valor>
+                                                                                         <#assign total_saldo = titulo.total_saldo>
+                                                                                        <tr>
+                                                                                        <th scope="row">${titulo.num}</th>
+                                                                                        <td>${titulo.emissao}</td>
+                                                                                        <td>${titulo.venc}</td>
+                                                                                        <td>${titulo.valor}</td>    
+                                                                                        <td>${titulo.valor}</td>
+                                                                                        <td>${titulo.saldo}</td>
+                                                                                        </tr>
+                                                                                </#list>
+                                                                                        <tr style="font-weight: bold; background-color: lightgray;">
+                                                                                            <td colspan="3" style="text-align: center;"> TOTAL </td>     
+                                                                                            <td>${total_valor} </td>
+                                                                                            <td>${total_valor} </td>
+                                                                                            <td>${total_saldo} </td>
+                                                                                        </tr>
+                                                                        </tbody>
+                                                                    </table>
+								</div>
+							</div>
+                                                        <br />
+                                                        <br />
+				  			<div class="row">
+				  				<div class="col-lg-12 col-xl-12" style="font-size: 12px;">
+				  					<a> Solicitamos seu comparecimento imediato no Departamento Financeiro para regulariza&ccedil;&atilde;o da situa&ccedil;&atilde;o. </a>
+				  					<br />
+						  			<br />
+						  			<a> Atenciosamente, </a>
+						  			<br />
+						  		</div>
+						  	</div>
+						  	<div class="row">
+						  		<div class="col-lg-12 col-xl-12" style="font-size: 12px;">
+						  			<img src="http://images.lisko.com.br/signature_scan.gif" class="img-fluid" alt="Responsive image">
+						  		</div>
+						  	</div>
+						  	<div class="row">
+						  		<div class="col-lg-12 col-xl-12" style="font-size: 12px;">
+						  			<a> EXPOCACCER COOPERATIVA DOS CAFEICULTORES DO CERRADO LTDA </a><br />
+									<a>	DEPARTAMENTO FINANCEIRO </a> <br />
+									<a> TELEFONE: (34) 3839-9300 - Ramal 9026 </a>
+									<br />
+									<br />
+									<a>	Obs: Caso o(s) titulo(s) ja tenha(m) sido(s) liquidado(s), gentileza nos enviar o comprovante de pagamento,
+										     via e-mail para financeiro@expocaccer.com.br, para efetuarmos a baixa.</a>
+				  				</div>
+				  			</div>
+				  		</div>
+				  </div>
+				</div>
+			</div>
+	   </div>
+	</div>
+
+    
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://unpkg.com/popper.js@1.12.6/dist/umd/popper.js" integrity="sha384-fA23ZRQ3G/J53mElWqVJEGJzU0sTs+SvzG8fXVWP+kJQ1lwFAOkcUOysnlKJC33U" crossorigin="anonymous"></script>
+	<script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js" integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9" crossorigin="anonymous"></script>
+	<script>$(document).ready(function() { $('body').bootstrapMaterialDesign(); });</script>
+ 
+</body>
+</html>

@@ -51,64 +51,80 @@ public class PeriodoVerificacaoDAO {
         
          PeriodoVerificacao periodo = new PeriodoVerificacao();
         
-         SessionFactory sessionfactory = new Configuration().configure().buildSessionFactory();
-          
-         Session session=sessionfactory.openSession();
-          
-         session.beginTransaction();
-          
-         periodo.setDescricaoPeriodoVerificacao("Dias");
-         periodo.setFatorMultiplicador(1440);
-         session.save(periodo);
-          
-         session.getTransaction().commit();
-         session.close();
+        try (SessionFactory sessionfactory = new Configuration().configure().buildSessionFactory()) {
+            Session session=sessionfactory.openSession();
+            
+            session.beginTransaction();
+            
+            periodo.setDescricaoPeriodoVerificacao("Dias");
+            periodo.setFatorMultiplicador(1440);
+            session.save(periodo);
+            
+            session.getTransaction().commit();
+            session.close();
+            
+            
+            session=sessionfactory.openSession();
+            session.beginTransaction();
+            
+            periodo.setDescricaoPeriodoVerificacao("Horas");
+            periodo.setFatorMultiplicador(60);
+            session.save(periodo);
+            
+            session.getTransaction().commit();
+            session.close();
+            
+            session=sessionfactory.openSession();
+            session.beginTransaction();
+            
+            periodo.setDescricaoPeriodoVerificacao("Minutos");
+            periodo.setFatorMultiplicador(1);
+            session.save(periodo);
+            
+            session.getTransaction().commit();
+            
+            session.close();
+        }
          
          
-         session=sessionfactory.openSession();
-         session.beginTransaction();
-          
-         periodo.setDescricaoPeriodoVerificacao("Horas");
-         periodo.setFatorMultiplicador(60);
-         session.save(periodo);
-          
-         session.getTransaction().commit();
-         session.close();
-         
-         session=sessionfactory.openSession();
-         session.beginTransaction();
-          
-         periodo.setDescricaoPeriodoVerificacao("Minutos");
-         periodo.setFatorMultiplicador(1);
-         session.save(periodo);
-          
-         session.getTransaction().commit();
-          
-         session.close();
-         sessionfactory.close();
 
     }
     
     public static String getMaxId(){
         
-         SessionFactory sessionfactory = new Configuration().configure().buildSessionFactory();
-          
-         Session session=sessionfactory.openSession();
-          
-         session.beginTransaction();
-         
-         String sqlquery = ("select max(id) from PeriodoVerificacao");
-         Query query = session.createQuery(sqlquery);
-         List list = query.list();
-         
-         String result = list.get(0).toString();
-                    
-         session.getTransaction().commit();
-          
-         session.close();
-         sessionfactory.close();
+        String result;
+        try (SessionFactory sessionfactory = new Configuration().configure().buildSessionFactory(); Session session = sessionfactory.openSession()) {
+            session.beginTransaction();
+            String sqlquery = ("select max(id) from PeriodoVerificacao");
+            Query query = session.createQuery(sqlquery);
+            List list = query.list();
+            result = list.get(0).toString();
+            session.getTransaction().commit();
+        }
         
          return result;
+    }
+    
+   @SuppressWarnings({"ConvertToTryWithResources", "JPQLValidation"})
+    public static boolean isDatabaseEmpty() {
+        
+          SessionFactory sessionfactory;
+          sessionfactory = new Configuration().configure().buildSessionFactory();
+          
+          Session session=sessionfactory.getCurrentSession();
+          
+          session.beginTransaction();
+          
+          boolean empty;                  
+          empty = sessionfactory.getCurrentSession().createQuery("Select 1 From PeriodoVerificacao").list().isEmpty();
+          
+          session.getTransaction().commit();
+          
+          session.close();
+          sessionfactory.close();
+          
+          return empty;
+        
     }
     
 }

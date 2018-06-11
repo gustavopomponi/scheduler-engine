@@ -1,6 +1,7 @@
 
 package com.lisko.com.br.dao;
 
+import com.lisko.com.br.entity.Mensagem;
 import com.lisko.com.br.entity.Parametro;
 import com.lisko.com.br.entity.PeriodoVerificacao;
 import java.time.LocalDateTime;
@@ -18,26 +19,16 @@ public class ParametroDAO {
           List proximaexecucao;
           String retorno = new String();
           
-        
           SessionFactory sessionfactory = new Configuration().configure().buildSessionFactory();
           
           Session session=sessionfactory.openSession();
           
-          Parametro objParametro=new Parametro();
          
           proximaexecucao = session.createQuery( "from Parametro" ).list();
           for ( Parametro param : (List<Parametro>) proximaexecucao ) {
                 retorno = param.getProximaexecucao();
           }
           
-          //objParametro=(Parametro)session.get(Parametro.class, Long.valueOf(3));
-          
-          //String varParametro = objParametro.getProximaexecucao();
-          /*List result;
-          result = session.createQuery( "from PeriodoVerificacao" ).list();
-          for ( PeriodoVerificacao periodo : (List<PeriodoVerificacao>) result ) {
-              System.out.println( periodo.getDescricaoPeriodoVerificacao() );
-          }*/
           session.beginTransaction().commit();
           
           session.close();
@@ -86,7 +77,7 @@ public class ParametroDAO {
     }
     
     @SuppressWarnings("ConvertToTryWithResources")
-    public static void populateParametro() {
+    public static void populateParametro(Long periodoId, Long mensagemId) {
         
         PeriodoVerificacao periodo = new PeriodoVerificacao();
         Parametro param = new Parametro();
@@ -101,12 +92,19 @@ public class ParametroDAO {
         int month = LocalDateTime.now().getMonthValue();
         int day = LocalDateTime.now().getDayOfMonth();
       
-        periodo.setCodPeriodoVerificacao(Long.valueOf(PeriodoVerificacaoDAO.getMaxId()));
+        periodo.setCodPeriodoVerificacao(periodoId);
         
         param.setFrequenciaverificacao(1);
+        param.setEmailfrom("scheduler@lisko.com.br");
         param.setPeriodoverificacao(periodo);
         param.setProximaexecucao(LocalDateTime.of(year,month,day,23,40).format(DateTimeFormatter.ISO_LOCAL_DATE_TIME));
         param.setGerarlog(false);
+        param.setSmtpauth(false);
+        param.setSmtphost("mail.lisko.com.br");
+        param.setSmtpport("25");
+        param.setSmtppassword("afwerwerwe");
+        param.setSmtpstarttls(false);
+        param.setSmtpusername("scheduler@lisko.com.br");
         
         session.save(param);       
         session.getTransaction().commit();
@@ -126,7 +124,7 @@ public class ParametroDAO {
         LocalDateTime calculo = null;
         LocalDateTime horatempo = null;
         
-        SessionFactory sessionfactory = new Configuration().configure().buildSessionFactory();
+        SessionFactory sessionfactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
           
         Session session=sessionfactory.openSession();
           
@@ -144,6 +142,14 @@ public class ParametroDAO {
               objParametro.setFrequenciaverificacao(param.getFrequenciaverificacao());
               objParametro.setGerarlog(param.getGerarlog());
               objParametro.setPeriodoverificacao(param.getPeriodoverificacao());
+              objParametro.setEmailfrom(param.getEmailfrom());
+              objParametro.setSmtpauth(param.getSmtpauth());
+              objParametro.setSmtpstarttls(param.getSmtpstarttls());
+              objParametro.setSmtphost(param.getSmtphost());
+              objParametro.setSmtppassword(param.getSmtppassword());
+              objParametro.setSmtpport(param.getSmtpport());
+              objParametro.setSmtpusername(param.getSmtpusername());
+
               
               Session sessionUpd=sessionfactory.openSession();
               sessionUpd.beginTransaction();
@@ -158,7 +164,42 @@ public class ParametroDAO {
         session.close();
     
         sessionfactory.close();
-          
+           
+        
+    }
+    
+    @SuppressWarnings("JPQLValidation")
+    public static Parametro getParametrosSmtp(){
+        
+        Parametro objParametro = new Parametro();
+        List parametrosmtp;
+
+        try (SessionFactory sessionfactory = new Configuration().configure().buildSessionFactory(); Session session = sessionfactory.openSession()) {
+            
+            session.beginTransaction();
+            
+            parametrosmtp = session.createQuery( "from Parametro" ).list();
+            
+            for ( Parametro param : (List<Parametro>) parametrosmtp ) {
+                
+                
+                objParametro.setEmailfrom(param.getEmailfrom());
+                objParametro.setSmtpusername(param.getSmtpusername());
+                objParametro.setSmtppassword(param.getSmtppassword());
+                objParametro.setSmtphost(param.getSmtphost());
+                objParametro.setSmtpport(param.getSmtpport());
+                objParametro.setSmtpauth(param.getSmtpauth());
+                objParametro.setSmtpstarttls(param.getSmtpstarttls());
+                objParametro.setGerarlog(param.getGerarlog());
+                
+                
+            }
+            
+            session.getTransaction().commit();
+        }
+        
+        return objParametro;
+        
     }
     
 }

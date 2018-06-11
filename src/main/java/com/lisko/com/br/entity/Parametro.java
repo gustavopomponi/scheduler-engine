@@ -26,6 +26,10 @@ public class Parametro implements Serializable {
     @JoinColumn(name="cod_periodoverificacao")
     private PeriodoVerificacao periodoverificacao;
     
+    @OneToOne(fetch= FetchType.LAZY)
+    @JoinColumn(name="cod_mensagem")
+    private Mensagem mensagem;
+    
     @Column(name="dt_proximaexecucao", nullable=false)
     private String  proximaexecucao;
     
@@ -37,13 +41,32 @@ public class Parametro implements Serializable {
     
     @Column(name="boo_gerarlog", nullable=false)
     private Boolean gerarlog;
-   
+    
+    @Column(name="des_emailfrom", nullable=false, columnDefinition = "varchar(100) default 'scheduler@lisko.com.br'")
+    private String emailfrom;
+    
+    @Column(name="des_smtpusername")
+    private String smtpusername;
+    
+    @Column(name="des_smtppassword")
+    private String smtppassword;
+    
+    @Column(name="des_smtphost")
+    private String smtphost;
+    
+    @Column(name="boo_smtpauth", nullable=false, columnDefinition = "boolean default false")
+    private Boolean smtpauth;
+    
+    @Column(name="boo_smtpstarttls", nullable=false, columnDefinition = "boolean default false")
+    private Boolean smtpstarttls;
+    
+    @Column(name="des_smtpport")
+    private String smtpport;
+    
     public Parametro() {
         
     }
     
-    
-
     public Long getId() {
         return id;
     }
@@ -99,8 +122,61 @@ public class Parametro implements Serializable {
     public void setGerarlog(Boolean gerarlog) {
         this.gerarlog = gerarlog;
     }
-    
-    
 
-    
+    public String getEmailfrom() {
+        return emailfrom;
+    }
+
+    public void setEmailfrom(String emailfrom) {
+        this.emailfrom = emailfrom;
+    }
+
+    public String getSmtpusername() {
+        return smtpusername;
+    }
+
+    public void setSmtpusername(String smtpusername) {
+        this.smtpusername = smtpusername;
+    }
+
+    public String getSmtppassword() {
+        return smtppassword;
+    }
+
+    public void setSmtppassword(String smtppassword) {
+        this.smtppassword = smtppassword;
+    }
+
+    public String getSmtphost() {
+        return smtphost;
+    }
+
+    public void setSmtphost(String smtphost) {
+        this.smtphost = smtphost;
+    }
+
+    public Boolean getSmtpauth() {
+        return smtpauth;
+    }
+
+    public void setSmtpauth(Boolean smtpauth) {
+        this.smtpauth = smtpauth;
+    }
+
+    public Boolean getSmtpstarttls() {
+        return smtpstarttls;
+    }
+
+    public void setSmtpstarttls(Boolean smtpstarttls) {
+        this.smtpstarttls = smtpstarttls;
+    }
+
+    public String getSmtpport() {
+        return smtpport;
+    }
+
+    public void setSmtpport(String smtpport) {
+        this.smtpport = smtpport;
+    }
+
 }
