@@ -13,25 +13,16 @@ public class ClienteDAO {
         
         try (SessionFactory sessionfactory = new Configuration().configure("hibernate-sqlserver.cfg.xml").buildSessionFactory(); Session session = sessionfactory.openSession()) {
             
-            String query = "SELECT TOP 1 B.*"
-                            +" FROM"
-                            +" ("
-                            +" SELECT"
+            String query = " SELECT"
                                     +" DISTINCT(A.CLI),"
-                                    +" A.EMAIL"
+                                    +" A.EMAIL,"
+                                    +" A.COBEMAIL"
                             +" FROM"
                             + " ("
                             + "SELECT"
                                 +" E1.E1_CLIENTE AS CLI,"
-                                +" E1.E1_LOJA AS LOJA,"
-                                +" A1.A1_NOME AS NOME,"
                                 +" A1.A1_EMAIL AS EMAIL,"
-                                +" E1.E1_PREFIXO AS PFX,"
-                                +" E1.E1_NUM AS NUM,"
-                                +" E1.E1_SALDO AS SALDO,"
-                                +" E1.E1_EMISSAO AS EMISSAO,"
-                                +" E1.E1_VENCREA AS VENC,"
-                                +" DATEDIFF ( day , cast(E1.E1_VENCREA as date)  , GETDATE() ) AS DIAS"
+                                +" A1.A1_BLEMAIL COBEMAIL"
                                 +" FROM"
                                 +" SE1010 E1"
                                 +" INNER JOIN"
@@ -39,13 +30,10 @@ public class ClienteDAO {
                                 +" WHERE"
                                 +" (E1.D_E_L_E_T_ <> '*') AND"
                                 +" (A1.D_E_L_E_T_ <> '*') AND"
-                                +" (DATEDIFF ( day , cast(E1.E1_VENCREA as date)  , GETDATE() )  > 10) AND"
-                                +" (E1.E1_SALDO > 0)"
-                            +" ) A"
-                            +" ) B";
+                                +" (E1.E1_SALDO > 0) AND"
+                                +" (A1.A1_BLEMAIL = 1)"
+                                +") A";
 
-         
-            
             List<Cliente> clientes = (List<Cliente>) session.createNativeQuery(query, Cliente.class)
                     .getResultList();
 

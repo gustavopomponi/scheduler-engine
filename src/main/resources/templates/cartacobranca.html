@@ -48,10 +48,10 @@
 				  			<br />
 				  			<div class="row">
 				  				<div class="col-lg-12 col-xl-12" style="font-size: 12px;">
-				  					<a> Taxa de Juros ao dia (%): 0,05 </a>
+				  					<a> Taxa de Juros ao dia (%): ${taxajuros} </a>
 				  					<br />
 						  			<br />
-						  			<a> Taxa de Multa (%): 0 </a>
+						  			<a> Taxa de Multa (%): ${taxamulta}  </a>
 				  				</div>
 				  			</div>
 				  			<br />
@@ -71,8 +71,8 @@
                                                                                 <th style="font-size: 12px;" scope="col">T&itilde;tulo</th>
                                                                                 <th style="font-size: 12px;" scope="col">Emiss&atilde;o</th>
                                                                                 <th style="font-size: 12px;" scope="col">Vencimento</th>
-                                                                                <th style="font-size: 12px;" scope="col">Valor Atual</th>  
-                                                                                <th style="font-size: 12px;" scope="col">Valor Corrigido</th>
+                                                                                <th style="font-size: 12px;" scope="col">Dias em Atraso</th>
+                                                                                <th style="font-size: 12px;" scope="col">Valor Atual</th>
                                                                                 <th style="font-size: 12px;" scope="col">Saldo</th>
                                                                                 </tr>
                                                                         </thead>
@@ -90,14 +90,13 @@
                                                                                         <th scope="row">${titulo.num}</th>
                                                                                         <td>${titulo.emissao}</td>
                                                                                         <td>${titulo.venc}</td>
+                                                                                        <td>${titulo.dias}</td>
                                                                                         <td>${titulo.valor}</td>    
-                                                                                        <td>${titulo.valor}</td>
                                                                                         <td>${titulo.saldo}</td>
                                                                                         </tr>
                                                                                 </#list>
                                                                                         <tr style="font-weight: bold; background-color: lightgray;">
-                                                                                            <td colspan="3" style="text-align: center;"> TOTAL </td>     
-                                                                                            <td>${total_valor} </td>
+                                                                                            <td colspan="4" style="text-align: center;"> TOTAL </td>     
                                                                                             <td>${total_valor} </td>
                                                                                             <td>${total_saldo} </td>
                                                                                         </tr>
@@ -118,7 +117,7 @@
 						  	</div>
 						  	<div class="row">
 						  		<div class="col-lg-12 col-xl-12" style="font-size: 12px;">
-						  			<img src="http://images.lisko.com.br/signature_scan.gif" class="img-fluid" alt="Responsive image">
+						  			<img src="http://images.lisko.com.br/IMG_11062018_163932_0.png" class="img-fluid" alt="Responsive image">
 						  		</div>
 						  	</div>
 						  	<div class="row">

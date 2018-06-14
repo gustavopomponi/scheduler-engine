@@ -102,6 +102,11 @@
             <artifactId>mssql-jdbc</artifactId>
             <version>6.4.0.jre8</version>
         </dependency>
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20171018</version>
+        </dependency>
     </dependencies>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

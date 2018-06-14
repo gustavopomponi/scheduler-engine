@@ -63,6 +63,12 @@ public class Parametro implements Serializable {
     @Column(name="des_smtpport")
     private String smtpport;
     
+    @Column(name="num_taxajuros")
+    private float taxajuros;
+    
+    @Column(name="num_taxamulta")
+    private float taxamulta;
+    
     public Parametro() {
         
     }
@@ -177,6 +183,22 @@ public class Parametro implements Serializable {
 
     public void setSmtpport(String smtpport) {
         this.smtpport = smtpport;
+    }
+
+    public float getTaxajuros() {
+        return taxajuros;
+    }
+
+    public void setTaxajuros(float taxajuros) {
+        this.taxajuros = taxajuros;
+    }
+
+    public float getTaxamulta() {
+        return taxamulta;
+    }
+
+    public void setTaxamulta(float taxamulta) {
+        this.taxamulta = taxamulta;
     }
 
 }

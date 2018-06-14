@@ -58,6 +58,7 @@ Contributor(s):
     <mapping class="com.lisko.com.br.entity.Parametro"></mapping>
     <mapping class="com.lisko.com.br.entity.Mensagem"></mapping>
     <mapping class="com.lisko.com.br.entity.Log"></mapping>
+    <mapping class="com.lisko.com.br.entity.ControleEnvio"></mapping>
     
   </session-factory>
 </hibernate-configuration>

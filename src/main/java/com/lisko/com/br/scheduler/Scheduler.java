@@ -2,13 +2,7 @@ package com.lisko.com.br.scheduler;
 
 import com.lisko.com.br.dao.MensagemDAO;
 import com.lisko.com.br.dao.PeriodoVerificacaoDAO;
-import com.lisko.com.br.entity.Cliente;
-import com.lisko.com.br.dao.ClienteDAO;
-import com.lisko.com.br.dao.TitulosDAO;
-import com.lisko.com.br.entity.Titulos;
-import java.time.LocalDateTime;
-import java.util.List;
-
+import com.lisko.com.br.entity.Mail;
 
 public class Scheduler {
 
@@ -25,7 +19,11 @@ public class Scheduler {
         else
         {
                      
-            Relogio.run();
+            //Relogio.run();
+            
+            Mail mail = new Mail();
+            
+            Email.enviar(mail);
             
             /*List<Titulos> titulosList = TitulosDAO.getTitulos("T00901");
             for (Titulos at: titulosList){

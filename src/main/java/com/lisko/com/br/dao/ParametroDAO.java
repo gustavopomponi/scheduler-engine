@@ -149,6 +149,8 @@ public class ParametroDAO {
               objParametro.setSmtppassword(param.getSmtppassword());
               objParametro.setSmtpport(param.getSmtpport());
               objParametro.setSmtpusername(param.getSmtpusername());
+              objParametro.setTaxajuros(param.getTaxajuros());
+              objParametro.setTaxamulta(Float.valueOf(String.format("%,.2f", param.getTaxamulta())));
 
               
               Session sessionUpd=sessionfactory.openSession();
@@ -191,6 +193,8 @@ public class ParametroDAO {
                 objParametro.setSmtpauth(param.getSmtpauth());
                 objParametro.setSmtpstarttls(param.getSmtpstarttls());
                 objParametro.setGerarlog(param.getGerarlog());
+                objParametro.setTaxajuros(param.getTaxajuros());
+                objParametro.setTaxamulta(param.getTaxamulta());
                 
                 
             }

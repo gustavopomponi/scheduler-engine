@@ -30,7 +30,7 @@ public class MailServiceImpl implements MailService {
     Configuration fmConfiguration;
 
     @Override
-    public void sendEmail(Mail mail) {
+    public void sendEmail(Mail mail, String template) {
         
         Log registro = new Log();
         Parametro param = ParametroDAO.getParametrosSmtp();
@@ -48,7 +48,7 @@ public class MailServiceImpl implements MailService {
             mimeMessageHelper.setSubject(mail.getMailSubject());
             mimeMessageHelper.setFrom(mail.getMailFrom());
             mimeMessageHelper.setTo(mail.getMailTo());
-            mail.setMailContent(geContentFromTemplate(mail.getModel()));
+            mail.setMailContent(geContentFromTemplate(mail.getModel(), template));
             mimeMessageHelper.setText(mail.getMailContent(), true);
  
             mailSender.send(mimeMessageHelper.getMimeMessage());
@@ -69,12 +69,12 @@ public class MailServiceImpl implements MailService {
        
     }
     
-    public String geContentFromTemplate(Map < String, Object > model) {
+    public String geContentFromTemplate(Map < String, Object > model, String template) {
         StringBuilder content = new StringBuilder();
  
         try {
             content.append(FreeMarkerTemplateUtils
-                .processTemplateIntoString(fmConfiguration.getTemplate("cartacobranca.html"), model));
+                .processTemplateIntoString(fmConfiguration.getTemplate(template), model));
         } catch (TemplateException | IOException e) {
             
         }

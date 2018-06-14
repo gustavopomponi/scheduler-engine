@@ -15,6 +15,9 @@ public class Cliente implements Serializable {
     
     @Column(name="email")
     private String  email;
+    
+    @Column(name="cobemail")
+    private String cobemail;
 
     public String getCli() {
         return cli;
@@ -22,6 +25,10 @@ public class Cliente implements Serializable {
 
     public String getEmail() {
         return email;
+    }
+
+    public String getCobemail() {
+        return cobemail;
     }
    
 }
